@@ -7,7 +7,7 @@ server.listen(8081, function () {
     console.log('server http launched');
 });
 const io = require('socket.io').listen(server);
-const Point = require('./class/Point')
+import Point from './class/Point';
 var p = new Point(-1,1);
 var p1 = new Point(0,0);
 var p2 = new Point(0,10);

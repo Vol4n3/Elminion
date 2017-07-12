@@ -1,5 +1,7 @@
-const Point = require('./Point');
-class Circle extends Point {
+import Point from './Point'; 
+
+export default class Circle extends Point {
+    
     constructor(x,y,radius){
         super(x,y);
         this.radius = radius;
@@ -45,4 +47,3 @@ class Circle extends Point {
         }
     }
 }
-module.exports = Circle;

@@ -1,5 +1,5 @@
-const Geometry = require('./Geometry');
-class Point extends Geometry {
+import Geometry from './Geometry';
+export default class Point extends Geometry {
     constructor(x, y) {
         super();
         this.x = x || 0;
@@ -26,11 +26,11 @@ class Point extends Geometry {
     }
     add(p) {
         this.setLastPosition();
-        this.translate(p.x, p.y)
+        this.translate(p.x, p.y);
     }
     soustract(p) {
         this.setLastPosition();
-        this.translate(- p.x, - p.y)
+        this.translate(- p.x, - p.y);
     }
     divide(p) {
         this.setLastPosition();
@@ -67,4 +67,3 @@ class Point extends Geometry {
         return ((b1 == b2) && (b2 == b3));
     }
 }
-module.exports = Point;
