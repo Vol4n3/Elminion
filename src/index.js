@@ -8,17 +8,12 @@ server.listen(8081, function () {
 });
 const io = require('socket.io').listen(server);
 import Point from './class/Point';
-var p = new Point(-1,1);
-var p1 = new Point(0,0);
-var p2 = new Point(0,10);
-var p3 = new Point(10,0);
-p.inTriangle(p1,p2,p3);
-console.log(p.inTriangle(p1,p2,p3));
-console.log(p.signTo(p1,p2));
+import Mob from './class/Mob';
+var m = new Mob();
 io.on('connection',function(socket){
 
     setTimeout(function(){
-    socket.emit('point',p);
+    socket.emit('newMob',m);
 
     },1000)
 })

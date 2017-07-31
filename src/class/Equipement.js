@@ -1,6 +1,7 @@
 import Mob from './Mob';
 export default class Equipement {
     constructor() {
+        this.classType='Equipement';
         this.durability = 100;
         this.maxDurability= 100;
         this.description = 'Casque de zeus';

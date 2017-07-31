@@ -1,6 +1,7 @@
 import Equipement from './Equipement';
 export default class Mob {
     constructor() {
+        this.classType = "Mob";
         this.life = 20;
         this.lifeMax = 20;
         this.xp = 0;
@@ -38,18 +39,19 @@ export default class Mob {
             arcane: 0
         };
         this.equipements = {
-            head: new Equipement(),
-            chest: new Equipement(),
-            belt: new Equipement(),
-            legs: new Equipement(),
-            foot: new Equipement(),
-            main_hand: new Equipement(),
-            second_hand: new Equipement(),
-            ring: new Equipement(),
-            neck: new Equipement(),
-            back: new Equipement(),
+            head: null,
+            chest: null,
+            belt: null,
+            legs: null,
+            foot: null,
+            main_hand: null,
+            second_hand: null,
+            ring: null,
+            neck: null,
+            back: null,
         }
     }
+    
     update() {
         this.vitality = this.vitalityBase;
         this.strength = this.strengthBase;
@@ -74,8 +76,7 @@ export default class Mob {
             lightning: 0,
             arcane: 0
         };
-        for(let e in this.equipements){
-            
+        for (let e in this.equipements) {
             this.equipements[e].applyEffects(this);
         }
     }
@@ -92,10 +93,16 @@ export default class Mob {
         let dmg;
         switch (element) {
             case earth:
-            case nature:
-            case wind:
-            case water:
                 dmg = this.strength;
+                break;
+            case nature:
+                dmg = 0;
+                break;
+            case wind:
+                dmg = 0;
+                break;
+            case water:
+                dmg = this.agility;
                 break;
             case lightning:
                 dmg = 0;
@@ -116,10 +123,16 @@ export default class Mob {
         let dmg;
         switch (element) {
             case earth:
+                dmg = (this.strength + this.level) + this.strength;
+                break;
             case nature:
+                dmg = (this.strength * 2 + this.level);
+                break;
             case wind:
+                dmg = (this.agility * 2 + this.level);
+                break;
             case water:
-                dmg = (this.agility + this.level) + this.strength;
+                dmg = (this.strength + this.level) + this.agility;
                 break;
             case lightning:
                 dmg = (this.intel * 2 + this.level);
@@ -145,10 +158,16 @@ export default class Mob {
         let dmg;
         switch (element) {
             case earth:
+                dmg = Math.random() * (this.strength + this.level) + this.strength;
+                break;
             case nature:
+                dmg = Math.random() * (this.strength * 2 + this.level);
+                break;
             case wind:
+                dmg = Math.random() * (this.agility * 2 + this.level);
+                break;
             case water:
-                dmg = Math.random() * (this.agility + this.level) + this.strength;
+                dmg = Math.random() * (this.strength + this.level) + this.strength;
                 break;
             case lightning:
                 dmg = Math.random() * (this.intel * 2 + this.level);
@@ -200,5 +219,18 @@ export default class Mob {
             this.level += amount;
             this.isLeveling();
         }
+    }
+    /**
+     * 
+     * @param {string} slot 
+     * @param {Equipement} equipement 
+     */
+    setEquipement(slot,equipement){
+        if(equipement.classType == 'equipement'){
+            this.equipements['slot'] = equipement;
+        }
+    }
+    clearSlot(slot){
+        this.equipements['slot'] = null;
     }
 };
